@@ -1,0 +1,75 @@
+library(ggplot2)
+library(dplyr) # easier data wrangling 
+library(viridis) # colour blind friendly palette, works in B&W also
+library(ggExtra) 
+library(tidyr)
+library(reshape2)
+library(data.table)
+library(ComplexHeatmap)
+library(circlize)
+library(RColorBrewer)
+#library(limma)
+library(gridExtra)
+
+
+
+#transposed<-t(virulencedata)
+mymatrixab<-as.matrix(justdataab)
+transposed<-t(mymatrixab)
+
+#get the number of clusters
+kmean_withinss <- function( k) {
+  cluster <- kmeans(mymatrixab, k)
+  return (cluster$tot.withinss)
+}
+#graphing clusters test 
+max_k<-10
+wss<-sapply(2:max_k,kmean_withinss)
+elbow <-data.frame(2:max_k, wss)
+ggplot(elbow, aes(x = X2.max_k, y = wss)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1, 25, by = 1))
+
+#Creation of heatmap 
+library(ComplexHeatmap)
+metadata <- donormetadata2[, c("Species", "Donor_ID", "Donor_Type")] 
+# Sample metadata (assuming your metadata is in this form)
+metadata <- donormetadata2[, c("Species", "Donor_Type", "Donor_ID")]
+
+# Define colors for each annotation
+color_species <- c("C.tropicalis" = "#a5dff1","N.glabratus" = "#d3add9","C.albicans" = "#c4ebcb")
+color_donor_type <- c("BD" = "black", "DCD" = "#FF0066")
+
+# Generate colors for Donor_ID with the correct number of colors
+donor_id_colors <- brewer.pal(n = length(unique(metadata$Donor_ID)), name = "Paired")
+
+# Map colors to unique values for Donor_ID
+color_donor_id <- setNames(donor_id_colors, unique(metadata$Donor_ID))
+
+# Create HeatmapAnnotation object
+col_ha <- HeatmapAnnotation(df = metadata,
+                            col = list(
+                              Species = color_species,
+                              Donor_Type = color_donor_type,
+                              Donor_ID = color_donor_id
+                            ))
+
+# Define a color palette for the heatmap data
+heatmap_colors <- colorRampPalette(c("grey", "white", "#E32227"))(100)
+
+Heatmap(as.matrix(justdata[1:28]), 
+        clustering_distance_columns = jaccard_dist,
+        clustering_method_columns = "complete",
+        clustering_distance_rows = "pearson", 
+        clustering_method_rows = "complete",
+        column_km = 5,
+        row_km = 4,
+        name = "expression", 
+        col = heatmap_colors,
+        top_annotation = col_ha,  # Adding the column annotations
+        row_title = "Genes", 
+        column_title = "Samples", 
+        show_row_names = TRUE, 
+        show_column_names = FALSE,
+)
