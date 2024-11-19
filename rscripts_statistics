@@ -96,3 +96,16 @@ fisher_test_result_Jejunum <- fisher.test(contingency_table_Jejunum)
 
 # View the results
 print(fisher_test_result_Jejunum)
+
+## Mixed Linear Model for qRT-qPCR Data 
+#Supporting Information Figure 1, A-B
+library(lmerTest)
+model2 <- lmer(ITS2_copy.number ~ donor_type + (1 | donor_id), data = its2luminal)
+summary(model2)
+#Supporting Information Figure 1, C-D
+library(lme4)
+model6 <- lmer(log10_bacterial_copynumber ~ donor_type + (1 | donor_id), data = bacterialmucosal)
+summary(model6)
+
+
+
