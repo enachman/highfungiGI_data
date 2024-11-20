@@ -1,0 +1,64 @@
+library(lmerTest)
+library(lme4)
+
+#log transformed qpcr data 
+bacterialluminal$log10_bacterial_copynumber <- log10(bacterialluminal$bacterial_copynumber + 1)
+#run mixed linear model 
+model <- lmer(log10_bacterial_copynumber ~ donor_type + (1 | donor_id), data = bacterialluminal)
+summary(model)
+model2 <- lmer(ITS2_copy.number ~ donor_type + (1 | donor_id), data = its2luminal)
+summary(model2)
+
+#example of wilcoxin test 
+#Subset data for each site
+stomach_data_lum <- subset(its2mucosal, site == "Stomach")
+duodenum_data_lum <- subset(its2mucosal, site == "Duodenum")
+jejunum_data_lum <- subset(its2mucosal, site == "Jejunum")
+ileum_data_lum <- subset(its2mucosal, site == "Ileum")
+colon_data_lum <- subset(its2mucosal, site == "Colon")
+
+#Perform Wilcoxon test between BD and DCD for each site
+wilcox_stomach_lum <- wilcox.test(its2_copynumber ~ donor_type, data = stomach_data_lum)
+wilcox_duodenum_lum <- wilcox.test(ITS2_copynumber ~ donor_type, data = duodenum_data_lum)
+wilcox_jejunum_lum <- wilcox.test(ITS2_copynumber ~ donor_type, data = jejunum_data_lum)
+wilcox_ileum_lum <- wilcox.test(ITS2_copynumber ~ donor_type, data = ileum_data_lum)
+wilcox_colon_lum <- wilcox.test(ITS2_copynumber ~ donor_type, data = colon_data_lum)
+
+#Collect p-values from all tests
+p_values_lum <- c(
+  wilcox_stomach_lum$p.value,
+  wilcox_duodenum_lum$p.value,
+  wilcox_jejunum_lum$p.value,
+  wilcox_ileum_lum$p.value,
+  wilcox_colon_lum$p.value
+)
+
+print(p_values_lum)
+# Apply Holm correction
+p_adjusted_muc <- p.adjust(p_values_muc, method = "holm")
+
+#Display the adjusted p-values
+print(p_adjusted_muc)
+
+#Fisher's Exact Test
+
+#fishers test for presence abesence values for all 
+
+#makecontingency_table
+contingency_table_all <- table(totalfungipresence$donor_type, totalfungipresence$fungal_presence)
+print(contingency_table_all)
+#run test on all 
+fisher_test_result_all <- fisher.test(contingency_table_all)
+print(fisher_test_result_all)
+
+#Subsetting data for Site1
+subset_data_stomach <- subset(totalfungipresence, site == "Stomach")
+
+#Create the contingency table
+contingency_table_stomach <- table(subset_data_stomach$donor_type, subset_data_stomach$fungal_presence)
+
+#Perform Fisher's Exact Test
+fisher_test_result_stomach <- fisher.test(contingency_table_stomach)
+
+# View the results
+print(fisher_test_result_stomach)
