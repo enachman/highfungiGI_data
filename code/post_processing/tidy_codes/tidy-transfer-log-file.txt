@@ -1,0 +1,48 @@
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/BIN_REASSEMBLY/LG295/reassembled_bins
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/3d/5e685462815064dfce45238422547f/BIN_REASSEMBLY/LG295/reassembled_bins
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/BIN_REASSEMBLY/LG4_Colon/reassembled_bins
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/16/b63b02ac92f19911f066bd6b024bc9/BIN_REASSEMBLY/LG4_Colon/reassembled_bins
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/BIN_REASSEMBLY/LG298/reassembled_bins
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/d2/d06f24010a37601452901a6842d053/BIN_REASSEMBLY/LG298/reassembled_bins
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/BIN_REASSEMBLY/LG296/reassembled_bins
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/43/98857ff04310f1b8f21296d9c2037d/BIN_REASSEMBLY/LG296/reassembled_bins
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/BIN_REFINEMENT/LG298
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/09/63b0d12216fd2aa06d8d26d1360918/BIN_REFINEMENT/LG298
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/BIN_REFINEMENT/LG4_Colon
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/48/7cfc7294b131500c0b0096ed300595/BIN_REFINEMENT/LG4_Colon
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/BIN_REFINEMENT/LG296
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/cf/48dd1e30eaa890a0409b2aa15286c4/BIN_REFINEMENT/LG296
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/BIN_REFINEMENT/LG295
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/4c/41899079604ff76839f061af6c658e/BIN_REFINEMENT/LG295
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/checkm/LG295
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/ea/50fce6d143328ef10b841e0adf9331/checkm/LG295
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/checkm/LG296
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/31/e9dcddbfce5074cf61237cfd8ab481/checkm/LG296
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/checkm/LG4_Colon
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/d8/0984226720edf2949f0b172e00281e/checkm/LG4_Colon
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/checkm/LG298
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/f4/25ffaaeac906bfb34da00130ce561e/checkm/LG298
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/quast/LG298
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/dc/5993425a37a2882b1648096c45d10b/quast/LG298
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/quast/LG4_Colon
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/f3/5f3b9602f58e664f7473ae1e53867a/quast/LG4_Colon
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/quast/LG295
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/4c/fcfeb6dc19b3ad1172d344259526ba/quast/LG295
+--------------------------
+Symbolic Link: /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/quast/LG296
+Target File : /mount/britton/Erika/2024-07-29-Funannotate_life-gift_batch_2/workflow-output/work/9a/09c04b9c8d71573c5a0ea6eb96ac61/quast/LG296
+--------------------------
