@@ -1,0 +1,84 @@
+library(ggplot2)
+library(dplyr) # easier data wrangling 
+library(viridis) # colour blind friendly palette, works in B&W also
+library(ggExtra) 
+library(tidyr)
+library(reshape2)
+library(data.table)
+library(ComplexHeatmap)
+library(circlize)
+library(RColorBrewer)
+#library(limma)
+library(gridExtra)
+
+
+#load data into R 
+
+#cbind for proper matrix 
+all3<-cbind(antibioticresistancedata[,c(2:27)])
+rownames(all3)<-antibioticresistancedata$Gene 
+
+#get the number of clusters
+kmean_withinss <- function( k) {
+  cluster <- kmeans(mymatrix, k)
+  return (cluster$tot.withinss)
+}
+
+max_k<-7
+wss<-sapply(2:max_k,kmean_withinss)
+elbow <-data.frame(2:max_k, wss)
+ggplot(elbow, aes(x = X2.max_k, y = wss)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1, 25, by = 1))
+
+kmean_withinss <- function( k) {
+  cluster <- kmeans(transposed, k)
+  return (cluster$tot.withinss)
+}
+max_k<-10
+wss<-sapply(2:max_k,kmean_withinss)
+elbow <-data.frame(2:max_k, wss)
+ggplot(elbow, aes(x = X2.max_k, y = wss)) +
+  geom_point() +
+  geom_line() +
+  scale_x_continuous(breaks = seq(1, 25, by = 1))
+
+#define colors
+color_species <- c("C.tropicalis" = "#a5dff1", "N.glabratus" = "#d3add9", "C.albicans" = "#c4ebcb")
+  
+#Confirm exact names for donor type
+color_donor_type <- c("BD" = "black", "DCD" = "#FF0066")
+donor_id_colors <- brewer.pal(n = length(unique(donormetadataall$Donor_ID)), name = "Paired")
+color_donor_id <- setNames(donor_id_colors, unique(donormetadataall$Donor_ID))
+heatmap_colors <- colorRampPalette(c("#D3D3D3", "white", "#D13932"))(100)
+
+#define col_ha for heatmap annotation 
+col_ha <- HeatmapAnnotation(
+  Species = donormetadataall$Species,
+  Donor_Type = donormetadataall$Donor_Type,
+  Donor_ID = donormetadataall$Donor_ID,
+  col = list(
+    Species = color_species,
+    Donor_Type = color_donor_type,
+    Donor_ID = color_donor_id
+  )
+)
+
+#run heatmap 
+Heatmap(as.matrix(all3[1:26]), 
+        clustering_distance_columns = jaccard_dist,
+        clustering_method_columns = "complete",
+        clustering_distance_rows = "euclidean", 
+        clustering_method_rows = "complete",
+        column_km = 4,
+        row_km = 2,
+        name = "expression", 
+        col = heatmap_colors,
+        top_annotation = col_ha,  # Include the annotation
+        row_title = "Genes", 
+        column_title = "Strains", 
+        show_row_names = TRUE, 
+        show_column_names = FALSE,
+        border= TRUE
+) 
