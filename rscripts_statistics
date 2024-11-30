@@ -1,0 +1,111 @@
+#wilcoxin 
+wilcox.test(fungal_concentration ~ donor_type, data = luminal_data, subset = site == "Colon")
+
+# Subset data for Colon
+colon_data_lum <- subset(luminal_data, site == "Colon")
+
+# Perform Wilcoxon test between BD and DCD for Colon
+wilcox_colon_lum <- wilcox.test(fungal_concentration ~ donor_type, data = colon_data_lum)
+
+# Display the result
+print(wilcox_colon_lum)
+
+# Subset data for Duodenum
+duodenum_data_lum <- subset(luminal_data, site == "Duodenum")
+
+# Perform Wilcoxon test between BD and DCD for Duodenum
+wilcox_duodenum_lum <- wilcox.test(fungal_concentration ~ donor_type, data = duodenum_data_lum)
+
+# Display the result
+print(wilcox_duodenum_lum)
+
+# Subset data for Jejunum
+jejunum_data_lum <- subset(luminal_data, site == "Jejunum")
+
+# Perform Wilcoxon test between BD and DCD for Jejunum
+wilcox_jejunum_lum <- wilcox.test(fungal_concentration ~ donor_type, data = jejunum_data_lum)
+
+# Display the result
+print(wilcox_jejunum_lum)
+# Subset data for Ileum
+ileum_data_lum <- subset(luminal_data, site == "Ileum")
+
+# Perform Wilcoxon test between BD and DCD for Ileum
+wilcox_ileum_lum <- wilcox.test(fungal_concentration ~ donor_type, data = ileum_data_lum)
+
+# Display the result
+print(wilcox_ileum_lum)
+# Subset data for stomach
+stomach_data_lum <- subset(luminal_data, site == "Stomach")
+
+# Perform Wilcoxon test between BD and DCD for Colon
+wilcox_stomach_lum <- wilcox.test(fungal_concentration ~ donor_type, data = stomach_data_lum)
+
+# Display the result
+print(wilcox_stomach_lum) 
+
+# Subset data for each site
+stomach_data <- subset(luminal_data, site == "Stomach")
+duodenum_data <- subset(luminal_data, site == "Duodenum")
+jejunum_data <- subset(luminal_data, site == "Jejunum")
+ileum_data <- subset(luminal_data, site == "Ileum")
+colon_data <- subset(luminal_data, site == "Colon")
+
+# Perform Wilcoxon test between BD and DCD for each site
+wilcox_stomach_lum <- wilcox.test(fungal_concentration ~ donor_type, data = stomach_data)
+wilcox_duodenum_lum <- wilcox.test(fungal_concentration ~ donor_type, data = duodenum_data)
+wilcox_jejunum_lum <- wilcox.test(fungal_concentration ~ donor_type, data = jejunum_data)
+wilcox_ileum_lum <- wilcox.test(fungal_concentration ~ donor_type, data = ileum_data)
+wilcox_colon_lum <- wilcox.test(fungal_concentration ~ donor_type, data = colon_data)
+
+# Collect p-values from all tests
+p_values_lum <- c(
+  wilcox_stomach_lum$p.value,
+  wilcox_duodenum_lum$p.value,
+  wilcox_jejunum_lum$p.value,
+  wilcox_ileum_lum$p.value,
+  wilcox_colon_lum$p.value
+)
+
+# Apply Bonferroni correction
+p_adjusted_lum <- p.adjust(p_values_lum, method = "holm")
+
+# Display the adjusted p-values
+print(p_adjusted_lum)
+
+##repeated for mucosal samples (frequency), luminal cultivaited, and mucosal cultivated
+
+#fishers test for presence abesence values of all samples 
+
+#make contingency_table
+contingency_table_all <- table(totalfungipresence$donor_type, totalfungipresence$fungal_presence)
+print(contingency_table_all)
+#run test on all 
+fisher_test_result_all <- fisher.test(contingency_table_all)
+print(fisher_test_result_all)
+
+#fischers for each site, repeated for each site 
+# Subsetting data for Jejunum
+subset_data_Jejunum <- subset(totalfungipresence, site == "Jejunum")
+
+# Create the contingency table
+contingency_table_Jejunum <- table(subset_data_Jejunum$donor_type, subset_data_Jejunum$fungal_presence)
+
+# Perform Fisher's Exact Test
+fisher_test_result_Jejunum <- fisher.test(contingency_table_Jejunum)
+
+# View the results
+print(fisher_test_result_Jejunum)
+
+## Mixed Linear Model for qRT-qPCR Data 
+#Supporting Information Figure 1, A-B
+library(lmerTest)
+model2 <- lmer(ITS2_copy.number ~ donor_type + (1 | donor_id), data = its2luminal)
+summary(model2)
+#Supporting Information Figure 1, C-D
+library(lme4)
+model6 <- lmer(log10_bacterial_copynumber ~ donor_type + (1 | donor_id), data = bacterialmucosal)
+summary(model6)
+
+
+
